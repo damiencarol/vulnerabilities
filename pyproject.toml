@@ -12,6 +12,6 @@ module = "vulnerabilities"
 author = "Damien Carol"
 author-email = "damien.carol@gmail.com"
 home-page = "https://github.com/damiencarol/vulnerabilities"
-description-file = "README.md"
+description-file = "README.rst"
 license = "BSD-3-Clause"
 requires = ["python-dateutil"]
