@@ -1,33 +1,47 @@
 {
   "errors": [],
-  "generated_at": "2021-04-08T12:32:49Z",
+  "generated_at": "2021-04-08T16:18:11Z",
   "metrics": {
     "_totals": {
-      "CONFIDENCE.HIGH": 1.0,
+      "CONFIDENCE.HIGH": 5.0,
       "CONFIDENCE.LOW": 0.0,
       "CONFIDENCE.MEDIUM": 0.0,
       "CONFIDENCE.UNDEFINED": 0.0,
       "SEVERITY.HIGH": 0.0,
-      "SEVERITY.LOW": 0.0,
-      "SEVERITY.MEDIUM": 1.0,
+      "SEVERITY.LOW": 2.0,
+      "SEVERITY.MEDIUM": 3.0,
       "SEVERITY.UNDEFINED": 0.0,
-      "loc": 4,
+      "loc": 11,
       "nosec": 0
     },
     "scripts/bandit/payload.py": {
-      "CONFIDENCE.HIGH": 1.0,
+      "CONFIDENCE.HIGH": 5.0,
       "CONFIDENCE.LOW": 0.0,
       "CONFIDENCE.MEDIUM": 0.0,
       "CONFIDENCE.UNDEFINED": 0.0,
       "SEVERITY.HIGH": 0.0,
-      "SEVERITY.LOW": 0.0,
-      "SEVERITY.MEDIUM": 1.0,
+      "SEVERITY.LOW": 2.0,
+      "SEVERITY.MEDIUM": 3.0,
       "SEVERITY.UNDEFINED": 0.0,
-      "loc": 4,
+      "loc": 11,
       "nosec": 0
     }
   },
   "results": [
+    {
+      "code": "1 import xml.sax\n2 from hashlib import md5\n3 \n",
+      "filename": "scripts/bandit/payload.py",
+      "issue_confidence": "HIGH",
+      "issue_severity": "LOW",
+      "issue_text": "Using xml.sax to parse untrusted XML data is known to be vulnerable to XML attacks. Replace xml.sax with the equivalent defusedxml package, or make sure defusedxml.defuse_stdlib() is called.",
+      "line_number": 1,
+      "line_range": [
+        1
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/latest/blacklists/blacklist_imports.html#b406-import-xml-sax",
+      "test_id": "B406",
+      "test_name": "blacklist"
+    },
     {
       "code": "4 def func1():\n5     test_digest = md5(\"test string\").digest()\n6     return test_digest\n",
       "filename": "scripts/bandit/payload.py",
@@ -41,6 +55,48 @@
       "more_info": "https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b303-md5",
       "test_id": "B303",
       "test_name": "blacklist"
+    },
+    {
+      "code": "8 def func2():  # double vulnerability\n9     test_digesta, test_digestb = md5(\"test string\").digest(), md5(\"test string2\").digest()\n10     return test_digesta, test_digestb\n",
+      "filename": "scripts/bandit/payload.py",
+      "issue_confidence": "HIGH",
+      "issue_severity": "MEDIUM",
+      "issue_text": "Use of insecure MD2, MD4, MD5, or SHA1 hash function.",
+      "line_number": 9,
+      "line_range": [
+        9
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b303-md5",
+      "test_id": "B303",
+      "test_name": "blacklist"
+    },
+    {
+      "code": "8 def func2():  # double vulnerability\n9     test_digesta, test_digestb = md5(\"test string\").digest(), md5(\"test string2\").digest()\n10     return test_digesta, test_digestb\n",
+      "filename": "scripts/bandit/payload.py",
+      "issue_confidence": "HIGH",
+      "issue_severity": "MEDIUM",
+      "issue_text": "Use of insecure MD2, MD4, MD5, or SHA1 hash function.",
+      "line_number": 9,
+      "line_range": [
+        9
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b303-md5",
+      "test_id": "B303",
+      "test_name": "blacklist"
+    },
+    {
+      "code": "12 def func3(val):\n13     assert 0 != val\n14     return val / 3\n",
+      "filename": "scripts/bandit/payload.py",
+      "issue_confidence": "HIGH",
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 13,
+      "line_range": [
+        13
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/latest/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
     }
   ]
 }

@@ -1,11 +1,11 @@
 import json
 
-from datetime import datetime
+import dateutil.parser
 
 
 class BanditParser(object):
     def get_scan_types(self):
-        return ["Bandit Scan"]
+        return ["BANDIT"]
 
     def get_label_for_scan_types(self, scan_type):
         return "Bandit Scan"
@@ -18,55 +18,36 @@ class BanditParser(object):
 
         dupes = dict()
         if "generated_at" in data:
-            find_date = datetime.strptime(data["generated_at"], "%Y-%m-%dT%H:%M:%SZ")
+            find_date = dateutil.parser.parse(data["generated_at"])
 
         for item in data["results"]:
-            mitigation = ""
-            impact = ""
-            references = ""
-            findingdetail = ""
-            title = ""
 
-            title = (
-                "Test Name: "
-                + item["test_name"]
-                + " Test ID: "
-                + item["test_id"]
-                + "dfdfdfdfdffdfdfdffdfdfdfdfdfdffdf"
-            )
-
-            #  ##### Finding details information ######
-            findingdetail += "Filename: " + item["filename"] + "\n"
-            findingdetail += "Line number: " + str(item["line_number"]) + "\n"
-            findingdetail += "Issue Confidence: " + item["issue_confidence"] + "\n\n"
+            findingdetail = "Filename: `" + item["filename"] + "`\n"
+            findingdetail += "Line number: `" + str(item["line_number"]) + "`\n"
+            findingdetail += "Issue Confidence: `" + item["issue_confidence"] + "`\n\n"
             findingdetail += "Code:\n"
             findingdetail += item["code"] + "\n"
 
-            sev = item["issue_severity"]
-            mitigation = item["issue_text"]
             references = item["test_id"]
 
-            dupe_key = title + item["filename"] + str(item["line_number"])
+            find = {
+                "title": item["issue_text"],
+                "description": findingdetail,
+                "severity": item["issue_severity"].title(),
+                "references": references,
+                "file_path": item["filename"],
+                "line": item["line_number"],
+                "date": find_date,
+                "static_finding": True,
+                "dynamic_finding": False,
+                "vuln_id_from_tool": ":".join([item["test_name"], item["test_id"]]),
+            }
+
+            dupe_key = find["title"] + item["filename"] + str(item["line_number"])
 
             if dupe_key in dupes:
                 find = dupes[dupe_key]
             else:
-                dupes[dupe_key] = True
-
-                find = {
-                    "title": title,
-                    "description": findingdetail,
-                    "severity": sev.title(),
-                    "mitigation": mitigation,
-                    "impact": impact,
-                    "references": references,
-                    "file_path": item["filename"],
-                    "line": item["line_number"],
-                    "date": find_date,
-                    "static_finding": True,
-                    "dynamic_finding": False,
-                }
                 dupes[dupe_key] = find
-                findingdetail = ""
 
         return list(dupes.values())
