@@ -4,7 +4,7 @@ vulnerabilities - framework to manipulate vulnerabilities
 |pypi| |build| |coverage|
 
 
-.. |pypi| image:: https://img.shields.io/pypi/v/vulnerabilities.svg?style=flat-square
+.. |pypi| image:: https://img.shields.io/pypi/v/vulnerabilities
     :target: https://pypi.org/project/vulnerabilities/
     :alt: PyPI Version
 
