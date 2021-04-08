@@ -34,6 +34,10 @@ jobs:
             - name: Run tox
               run: |
                   python -m tox
+  
+            - name: check tox
+              run: |
+                  ls
 
             - name: Upload coverage to Codecov
               uses: codecov/codecov-action@v1
