@@ -1,4 +1,0 @@
-
-
-def mock():
-    pass
