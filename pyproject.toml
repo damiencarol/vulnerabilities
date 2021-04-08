@@ -14,3 +14,4 @@ author-email = "damien.carol@gmail.com"
 home-page = "https://github.com/damiencarol/vulnerabilities"
 description-file = "README.md"
 license = "BSD-3-Clause"
+requires = ["python-dateutil"]
