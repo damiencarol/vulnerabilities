@@ -1,5 +1,7 @@
 import datetime
+
 from dateutil.tz import tzutc
+
 from vulnerabilities.tools.bandit.parser import BanditParser
 
 
@@ -29,7 +31,7 @@ class TestBanditParser():
         findings = parser.get_findings(testfile, None)
         assert findings is not None
 
-    def test_bandit_parser_latest(self):
+    def test_bandit_parser_report1(self):
         testfile = open("tests/scans/bandit/report1.json")
         parser = BanditParser()
         findings = parser.get_findings(testfile, None)
