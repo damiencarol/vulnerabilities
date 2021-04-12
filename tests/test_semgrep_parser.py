@@ -44,6 +44,7 @@ class TestSemgrepParser():
         assert "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest02195.java" == finding['file_path']
         assert 64 == finding['line']
         assert "java.lang.security.audit.cbc-padding-oracle.cbc-padding-oracle" == finding['vuln_id_from_tool']
+        assert 696 == finding['cwe']
 
     def test_Semgrep_parser_report2(self):
         testfile = open("tests/scans/semgrep/report2.json")
@@ -57,6 +58,7 @@ class TestSemgrepParser():
         assert "scripts/semgrep/payload.py" == finding['file_path']
         assert 9 == finding['line']
         assert "python.lang.security.insecure-hash-algorithms.insecure-hash-algorithm-md5" == finding['vuln_id_from_tool']
+        assert 327 == finding['cwe']
 
     def test_Semgrep_parser_report_error1(self):
         testfile = open("tests/scans/semgrep/report_error1.json")

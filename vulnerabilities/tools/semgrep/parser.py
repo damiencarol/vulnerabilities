@@ -25,6 +25,12 @@ class SemgrepParser(object):
                 "references": item["extra"]["metadata"]["references"],
                 "file_path": item["path"],
                 "line": item["start"]["line"],
+                "cwe": int(
+                    item["extra"]["metadata"]
+                    .get("cwe")
+                    .partition(":")[0]
+                    .partition("-")[2]
+                ),
                 "static_finding": True,
                 "dynamic_finding": False,
                 "vuln_id_from_tool": ":".join(
