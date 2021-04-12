@@ -1,0 +1,38 @@
+
+name: Check scanners
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                python-version-major: [3]
+                python-version-minor: [7, 8, 9]
+
+        env:
+            USING_COVERAGE: "3.9"
+
+        steps:
+            - name: Checkout sources
+              uses: actions/checkout@v2
+
+            - name: Set up Python
+              uses: actions/setup-python@v2
+              with:
+                  python-version: ${{ matrix.python-version-major }}.${{ matrix.python-version-minor }}
+
+            - name: Install dependencies
+              run: |
+                  python -m pip install --upgrade pip
+                  python -m pip install pytest bandit
+
+            - name: Run Bandit
+              run: |
+                  python -m bandit -f json -r -o tests/scans/bandit/latest.json tests/payload/
+                  python -m pytest tests.test_bandit_parser
