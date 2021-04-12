@@ -2,6 +2,12 @@ import json
 
 
 class SemgrepParser(object):
+    """semgrep scanner from pypi package semgrep
+
+    Notes:
+      - title are not present in data so use rule name
+    """
+
     def get_scan_types(self):
         return ["SEMGREP"]
 
@@ -14,40 +20,46 @@ class SemgrepParser(object):
     def get_findings(self, filename, test):
         data = json.load(filename)
 
-        dupes = dict()
-
         for item in data["results"]:
 
-            find = {
-                "title": item["extra"]["message"].split(".")[0],
+            finding = {
+                "title": item["check_id"],
                 "description": item["extra"]["message"],
                 "severity": self.convert_severity(item["extra"]["severity"]),
-                "references": item["extra"]["metadata"]["references"],
                 "file_path": item["path"],
                 "line": item["start"]["line"],
-                "cwe": int(
+                "static_finding": True,
+                "dynamic_finding": False,
+                "vuln_id_from_tool": item["check_id"],
+            }
+
+            # manage CWE
+            if "cwe" in item["extra"]["metadata"]:
+                finding["cwe"] = int(
                     item["extra"]["metadata"]
                     .get("cwe")
                     .partition(":")[0]
                     .partition("-")[2]
-                ),
-                "static_finding": True,
-                "dynamic_finding": False,
-                "vuln_id_from_tool": ":".join(
+                )
+
+            # manage references from metadata
+            if "references" in item["extra"]["metadata"]:
+                finding["references"] = item["extra"]["metadata"]["references"]
+
+            # manage mitigation from metadata
+            if "fix" in item["extra"]:
+                finding["mitigation"] = item["extra"]["fix"]
+            elif "fix_regex" in item["extra"]:
+                finding["mitigation"] = "\n".join(
                     [
-                        item["check_id"],
+                        "**You can automaticaly apply this regex:**",
+                        "\n```\n",
+                        json.dumps(item["extra"]["fix_regex"]),
+                        "\n```\n",
                     ]
-                ),
-            }
+                )
 
-            dupe_key = find["title"] + find["file_path"] + str(find["line"])
-
-            if dupe_key in dupes:
-                find = dupes[dupe_key]
-            else:
-                dupes[dupe_key] = find
-
-        return list(dupes.values())
+            yield finding
 
     def convert_severity(self, val):
         if "WARNING" == val.upper():

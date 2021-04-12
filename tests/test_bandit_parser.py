@@ -5,8 +5,7 @@ from dateutil.tz import tzutc
 from vulnerabilities.tools.bandit.parser import BanditParser
 
 
-class TestBanditParser():
-
+class TestBanditParser:
     def test_bandit_parser_get_scan_types(self):
         parser = BanditParser()
         assert "BANDIT" in parser.get_scan_types()
@@ -38,9 +37,9 @@ class TestBanditParser():
         testfile.close()
         assert 4 == len(findings)
         finding = findings[1]
-        assert "Use of insecure MD2, MD4, MD5, or SHA1 hash function." == finding['title']
-        assert "Medium" == finding['severity']
-        assert datetime.datetime(2021, 4, 8, 16, 18, 11, tzinfo=tzutc()) == finding['date']  # "2021-04-08T12:32:49Z"
-        assert "scripts/bandit/payload.py" == finding['file_path']
-        assert 5 == finding['line']
-        assert "blacklist:B303" == finding['vuln_id_from_tool']
+        assert "Use of insecure MD2, MD4, MD5, or SHA1 hash function." == finding["title"]
+        assert "Medium" == finding["severity"]
+        assert datetime.datetime(2021, 4, 8, 16, 18, 11, tzinfo=tzutc()) == finding["date"]  # "2021-04-08T12:32:49Z"
+        assert "scripts/bandit/payload.py" == finding["file_path"]
+        assert 5 == finding["line"]
+        assert "blacklist:B303" == finding["vuln_id_from_tool"]
