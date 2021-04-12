@@ -80,11 +80,6 @@ It is maintained by:
 
 * Damien Carol <damien.carol@gmail.com> 2021-
 
-Contact
-=======
-Our mailing list is available at `dateutil@python.org <https://mail.python.org/mailman/listinfo/dateutil>`_. As it is hosted by the PSF, it is subject to the `PSF code of
-conduct <https://www.python.org/psf/conduct/>`_.
-
 License
 =======
 
