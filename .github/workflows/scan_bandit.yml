@@ -30,9 +30,11 @@ jobs:
             - name: Install dependencies
               run: |
                   python -m pip install --upgrade pip
-                  python -m pip install pytest bandit dateutil
+                  python -m pip install flit pytest bandit
 
             - name: Run Bandit
               run: |
                   python -m bandit --exit-zero -f json -r -o tests/scans/bandit/latest.json tests/payload/
+                  python -m flit build
+                  python -m pip install dist/vulnerabilities-*.whl
                   python -m pytest tests/test_bandit_parser.py
