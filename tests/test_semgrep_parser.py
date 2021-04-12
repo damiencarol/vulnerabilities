@@ -39,7 +39,7 @@ class TestSemgrepParser():
         testfile.close()
         assert 3 == len(findings)
         finding = findings[1]
-        assert "Using CBC with PKCS5Padding is susceptible to padding orcale attacks." == finding['title']
+        assert "Using CBC with PKCS5Padding is susceptible to padding orcale attacks" == finding['title']
         assert "Low" == finding['severity']
         assert "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest02195.java" == finding['file_path']
         assert 64 == finding['line']
@@ -53,7 +53,7 @@ class TestSemgrepParser():
         testfile.close()
         assert 3 == len(findings)
         finding = findings[1]
-        assert "Detected MD5 hash algorithm which is considered insecure." == finding['title']
+        assert "Detected MD5 hash algorithm which is considered insecure" == finding['title']
         assert "Low" == finding['severity']
         assert "scripts/semgrep/payload.py" == finding['file_path']
         assert 9 == finding['line']

@@ -19,7 +19,7 @@ class SemgrepParser(object):
         for item in data["results"]:
 
             find = {
-                "title": item["extra"]["message"].rsplit(".")[0] + ".",
+                "title": item["extra"]["message"].split(".")[0],
                 "description": item["extra"]["message"],
                 "severity": self.convert_severity(item["extra"]["severity"]),
                 "references": item["extra"]["metadata"]["references"],

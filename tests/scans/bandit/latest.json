@@ -1,6 +1,6 @@
 {
   "errors": [],
-  "generated_at": "2021-04-08T16:18:11Z",
+  "generated_at": "2021-04-12T10:36:12Z",
   "metrics": {
     "_totals": {
       "CONFIDENCE.HIGH": 5.0,
@@ -14,7 +14,7 @@
       "loc": 11,
       "nosec": 0
     },
-    "scripts/bandit/payload.py": {
+    "tests/payload/payload.py": {
       "CONFIDENCE.HIGH": 5.0,
       "CONFIDENCE.LOW": 0.0,
       "CONFIDENCE.MEDIUM": 0.0,
@@ -30,7 +30,7 @@
   "results": [
     {
       "code": "1 import xml.sax\n2 from hashlib import md5\n3 \n",
-      "filename": "scripts/bandit/payload.py",
+      "filename": "tests/payload/payload.py",
       "issue_confidence": "HIGH",
       "issue_severity": "LOW",
       "issue_text": "Using xml.sax to parse untrusted XML data is known to be vulnerable to XML attacks. Replace xml.sax with the equivalent defusedxml package, or make sure defusedxml.defuse_stdlib() is called.",
@@ -44,7 +44,7 @@
     },
     {
       "code": "4 def func1():\n5     test_digest = md5(\"test string\").digest()\n6     return test_digest\n",
-      "filename": "scripts/bandit/payload.py",
+      "filename": "tests/payload/payload.py",
       "issue_confidence": "HIGH",
       "issue_severity": "MEDIUM",
       "issue_text": "Use of insecure MD2, MD4, MD5, or SHA1 hash function.",
@@ -58,7 +58,7 @@
     },
     {
       "code": "8 def func2():  # double vulnerability\n9     test_digesta, test_digestb = md5(\"test string\").digest(), md5(\"test string2\").digest()\n10     return test_digesta, test_digestb\n",
-      "filename": "scripts/bandit/payload.py",
+      "filename": "tests/payload/payload.py",
       "issue_confidence": "HIGH",
       "issue_severity": "MEDIUM",
       "issue_text": "Use of insecure MD2, MD4, MD5, or SHA1 hash function.",
@@ -72,7 +72,7 @@
     },
     {
       "code": "8 def func2():  # double vulnerability\n9     test_digesta, test_digestb = md5(\"test string\").digest(), md5(\"test string2\").digest()\n10     return test_digesta, test_digestb\n",
-      "filename": "scripts/bandit/payload.py",
+      "filename": "tests/payload/payload.py",
       "issue_confidence": "HIGH",
       "issue_severity": "MEDIUM",
       "issue_text": "Use of insecure MD2, MD4, MD5, or SHA1 hash function.",
@@ -86,7 +86,7 @@
     },
     {
       "code": "12 def func3(val):\n13     assert 0 != val\n14     return val / 3\n",
-      "filename": "scripts/bandit/payload.py",
+      "filename": "tests/payload/payload.py",
       "issue_confidence": "HIGH",
       "issue_severity": "LOW",
       "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
