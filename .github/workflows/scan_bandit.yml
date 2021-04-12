@@ -35,4 +35,4 @@ jobs:
             - name: Run Bandit
               run: |
                   python -m bandit --exit-zero -f json -r -o tests/scans/bandit/latest.json tests/payload/
-                  python -m pytest tests.test_bandit_parser
+                  python -m pytest tests/test_bandit_parser.py
