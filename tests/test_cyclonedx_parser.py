@@ -54,6 +54,14 @@ class TestCyclonedxParser:
         assert "date" in finding
         assert datetime.datetime(2009, 10, 10, 12, 0, tzinfo=tzoffset(None, -18000)) == finding["date"]
 
+    def test_Cyclonedx_parser_report_date(self):
+        testfile = open("tests/scans/cyclonedx/report_severity_none.xml")
+        findings = list(parse(testfile))
+        assert 2 == len(findings)
+        finding = findings[1]
+        assert "severity" in finding
+        assert finding["severity"] is None
+
     def test_Cyclonedx_parse_report_error1(self):
         testfile = open("tests/scans/cyclonedx/report_error1.xml")
         with pytest.raises(ValueError):
