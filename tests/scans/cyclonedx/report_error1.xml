@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bom xmlns="http://another.wrong.namespace.org/0.0"
+     xmlns:v="http://cyclonedx.org/schema/ext/vulnerability/1.0"
+     serialNumber="urn:uuid:3e671687-395b-41f5-a30f-a58921a69b79"
+     version="1">
+  <components>
+    <component type="library" bom-ref="pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.9.9">
+      <group>com.fasterxml.jackson.core</group>
+      <name>jackson-databind</name>
+      <version>2.9.9</version>
+      <purl>pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.9.9</purl>
+    </component>
+  </components>
+</bom>
