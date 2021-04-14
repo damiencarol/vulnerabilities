@@ -2,7 +2,7 @@ import logging
 import re
 
 import dateutil
-from cvss import CVSS3
+from cvss.cvss3 import CVSS3
 from defusedxml import ElementTree
 
 LOGGER = logging.getLogger(__name__)
