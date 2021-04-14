@@ -42,7 +42,7 @@ https://github.com/damiencarol/vulnerabilities/
 Features
 ========
 
-* Load reports from Bandit Python tool
+* Load reports from different tools (Anchore Grype, Bandit, CycloneDX format)
 
 Quick example
 =============
