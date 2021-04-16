@@ -3,6 +3,7 @@ import datetime
 from dateutil.tz import tzutc
 
 from vulnerabilities.tools.bandit.parser import BanditParser
+from utils import check_finding
 
 
 class TestBanditParser:
@@ -23,12 +24,16 @@ class TestBanditParser:
         parser = BanditParser()
         findings = parser.get_findings(testfile, None)
         assert 0 == len(findings)
+        for finding in findings:
+            check_finding(finding)
 
     def test_bandit_parser_latest(self):
         testfile = open("tests/scans/bandit/latest.json")
         parser = BanditParser()
         findings = parser.get_findings(testfile, None)
-        assert findings is not None
+        assert type(findings) is list
+        for finding in findings:
+            check_finding(finding)
 
     def test_bandit_parser_report1(self):
         testfile = open("tests/scans/bandit/report1.json")
@@ -36,6 +41,8 @@ class TestBanditParser:
         findings = parser.get_findings(testfile, None)
         testfile.close()
         assert 4 == len(findings)
+        for finding in findings:
+            check_finding(finding)
         finding = findings[1]
         assert "Use of insecure MD2, MD4, MD5, or SHA1 hash function." == finding["title"]
         assert "Medium" == finding["severity"]

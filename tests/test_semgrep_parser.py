@@ -4,6 +4,7 @@ import pytest
 from dateutil.tz import tzutc
 
 from vulnerabilities.tools.semgrep.parser import SemgrepParser
+from utils import check_finding
 
 
 class TestSemgrepParser:
@@ -30,6 +31,8 @@ class TestSemgrepParser:
         parser = SemgrepParser()
         findings = parser.get_findings(testfile, None)
         assert findings is not None
+        for finding in findings:
+            check_finding(finding)
 
     def test_Semgrep_parser_report1(self):
         testfile = open("tests/scans/semgrep/report1.json")
@@ -37,6 +40,8 @@ class TestSemgrepParser:
         findings = list(parser.get_findings(testfile, None))
         testfile.close()
         assert 3 == len(findings)
+        for finding in findings:
+            check_finding(finding)
         finding = findings[1]
         assert "Low" == finding["severity"]
         assert "src/main/java/org/owasp/benchmark/testcode/BenchmarkTest02195.java" == finding["file_path"]
@@ -50,6 +55,8 @@ class TestSemgrepParser:
         findings = list(parser.get_findings(testfile, None))
         testfile.close()
         assert 4 == len(findings)
+        for finding in findings:
+            check_finding(finding)
         finding = findings[1]
         assert "Low" == finding["severity"]
         assert "scripts/semgrep/payload.py" == finding["file_path"]
@@ -71,6 +78,8 @@ class TestSemgrepParser:
         findings = list(parser.get_findings(testfile, None))
         testfile.close()
         assert 48 == len(findings)
+        for finding in findings:
+            check_finding(finding)
         finding = findings[0]
         assert "High" == finding["severity"]
         assert "tasks.py" == finding["file_path"]
