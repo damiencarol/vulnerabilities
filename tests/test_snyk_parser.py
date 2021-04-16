@@ -51,6 +51,8 @@ class TestSnykParser:
         success, message, findings = list(parse(testfile))
         assert success
         assert 62 == len(findings)
+        for finding in findings:
+            check_finding(finding)
         finding = findings[0]
         assert "High" == finding["severity"]
         assert "pip" == finding["component_vendor"]
@@ -79,6 +81,8 @@ class TestSnykParser:
         success, message, findings = list(parse(testfile))
         assert success
         assert 41 == len(findings)
+        for finding in findings:
+            check_finding(finding)
         finding = findings[0]
         assert "Medium" == finding["severity"]
         assert "maven" == finding["component_vendor"]

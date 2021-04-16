@@ -4,20 +4,23 @@ import pytest
 from dateutil.tz import tzutc, tzoffset
 
 from vulnerabilities.tools.cyclonedx.parser import parse
-
+from utils import check_finding
 
 class TestCyclonedxParser:
-    @pytest.mark.skip(reason="Anchore Grype doesn't generate well formatted XML files for now (9.0 2021-04-14)")
     def test_parse_grype(self):
         """Output of Anchore Grype"""
-        testfile = open("tests/scans/cyclonedx/grype.9_0.xml")
-        findings = list(parse(testfile))
-        assert 0 == len(findings)
+        testfile = open("tests/scans/cyclonedx/grype.latest.xml")
+        findings = parse(testfile)
+        assert type(findings) is list
+        for finding in findings:
+            check_finding(finding)
 
     def test_Cyclonedx_parser_report1(self):
         testfile = open("tests/scans/cyclonedx/spec1.xml")
         findings = list(parse(testfile))
         assert 2 == len(findings)
+        for finding in findings:
+            check_finding(finding)
         finding = findings[0]
         assert "Info" == finding["severity"]
         assert "com.fasterxml.jackson.core" == finding["component_vendor"]
@@ -36,6 +39,8 @@ class TestCyclonedxParser:
         testfile = open("tests/scans/cyclonedx/grype_dd_1_14_1.xml")
         findings = list(parse(testfile))
         assert 619 == len(findings)
+        for finding in findings:
+            check_finding(finding)
         finding = findings[0]
         assert "Info" == finding["severity"]
         assert "Deprecated" == finding["component_name"]
@@ -50,6 +55,8 @@ class TestCyclonedxParser:
         testfile = open("tests/scans/cyclonedx/report_date.xml")
         findings = list(parse(testfile))
         assert 2 == len(findings)
+        for finding in findings:
+            check_finding(finding)
         finding = findings[0]
         assert "date" in finding
         assert datetime.datetime(2009, 10, 10, 12, 0, tzinfo=tzoffset(None, -18000)) == finding["date"]
@@ -58,6 +65,8 @@ class TestCyclonedxParser:
         testfile = open("tests/scans/cyclonedx/report_severity_none.xml")
         findings = list(parse(testfile))
         assert 2 == len(findings)
+        for finding in findings:
+            check_finding(finding)
         finding = findings[1]
         assert "severity" in finding
         assert finding["severity"] is None
