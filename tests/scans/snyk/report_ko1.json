@@ -1,0 +1,5 @@
+{
+  "ok": false,
+  "error": "Cannot find lockfile /home/hey/vulnerabilities/poetry.lock",
+  "path": "/home/hey/vulnerabilities"
+}

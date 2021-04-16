@@ -8,6 +8,11 @@ LOGGER = logging.getLogger(__name__)
 
 def parse(file):
     data = json.load(file)
+
+    # manage when the Snyk failed to generate the report
+    if "error" in data:
+        return False, data["error"], None
+
     temp = []
     if type(data) is list:
         for tree in data:
@@ -16,7 +21,7 @@ def parse(file):
     else:
         for vuln in data["vulnerabilities"]:
             temp.append(get_item(vuln))
-    return temp
+    return True, "parsed without errors", temp
 
 
 def get_item(vulnerability):

@@ -3,42 +3,33 @@ import datetime
 import pytest
 from dateutil.tz import tzutc
 
-from vulnerabilities.tools.semgrep.parser import SemgrepParser
+from vulnerabilities.tools.semgrep.parser import parse
 from utils import check_finding
 
 
 class TestSemgrepParser:
-    def test_Semgrep_parser_get_scan_types(self):
-        parser = SemgrepParser()
-        assert "SEMGREP" in parser.get_scan_types()
-
-    def test_Semgrep_parser_get_label_for_scan_types(self):
-        parser = SemgrepParser()
-        assert "Semgrep Scan" == parser.get_label_for_scan_types("Semgrep")
-
-    def test_Semgrep_parser_get_description_for_scan_types(self):
-        parser = SemgrepParser()
-        assert parser.get_description_for_scan_types("Semgrep") is not None
 
     def test_Semgrep_parser_has_no_finding(self):
         testfile = open("tests/scans/semgrep/empty.json")
-        parser = SemgrepParser()
-        findings = list(parser.get_findings(testfile, None))
+        success, message, findings = parse(testfile)
+        findings = list(findings)
+        assert success
         assert 0 == len(findings)
 
     def test_Semgrep_parser_latest(self):
         testfile = open("tests/scans/semgrep/latest.json")
-        parser = SemgrepParser()
-        findings = parser.get_findings(testfile, None)
+        success, message, findings = parse(testfile)
+        findings = list(findings)
+        assert success
         assert findings is not None
         for finding in findings:
             check_finding(finding)
 
     def test_Semgrep_parser_report1(self):
         testfile = open("tests/scans/semgrep/report1.json")
-        parser = SemgrepParser()
-        findings = list(parser.get_findings(testfile, None))
-        testfile.close()
+        success, message, findings = parse(testfile)
+        findings = list(findings)
+        assert success
         assert 3 == len(findings)
         for finding in findings:
             check_finding(finding)
@@ -51,9 +42,9 @@ class TestSemgrepParser:
 
     def test_Semgrep_parser_report2(self):
         testfile = open("tests/scans/semgrep/report2.json")
-        parser = SemgrepParser()
-        findings = list(parser.get_findings(testfile, None))
-        testfile.close()
+        success, message, findings = parse(testfile)
+        findings = list(findings)
+        assert success
         assert 4 == len(findings)
         for finding in findings:
             check_finding(finding)
@@ -68,14 +59,15 @@ class TestSemgrepParser:
 
     def test_Semgrep_parser_report_error1(self):
         testfile = open("tests/scans/semgrep/report_error1.json")
-        parser = SemgrepParser()
-        with pytest.raises(ValueError):
-            findings = list(parser.get_findings(testfile, None))
+        success, message, findings = parse(testfile)
+        assert not success
+        assert "Unknown value for severity: error_value" == message
 
     def test_Semgrep_parser_report3(self):
         testfile = open("tests/scans/semgrep/report3.json")
-        parser = SemgrepParser()
-        findings = list(parser.get_findings(testfile, None))
+        success, message, findings = parse(testfile)
+        findings = list(findings)
+        assert success
         testfile.close()
         assert 48 == len(findings)
         for finding in findings:

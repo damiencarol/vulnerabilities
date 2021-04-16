@@ -9,9 +9,17 @@ from utils import check_finding
 
 class TestSnykParser:
 
+    def test_Snyk_parser_empty(self):
+        """empty report"""
+        testfile = open("tests/scans/snyk/empty.json")
+        success, message, findings = list(parse(testfile))
+        assert success
+        assert 0 == len(findings)
+
     def test_Snyk_parser_report1(self):
         testfile = open("tests/scans/snyk/all_projects_issue4277.json")
-        findings = list(parse(testfile))
+        success, message, findings = list(parse(testfile))
+        assert success
         assert 82 == len(findings)
         for finding in findings:
             check_finding(finding)
@@ -40,7 +48,8 @@ class TestSnykParser:
     def test_Snyk_parser_dd(self):
         """Recent version of Snyk (2021-04-15)"""
         testfile = open("tests/scans/snyk/all_projects_dd.json")
-        findings = list(parse(testfile))
+        success, message, findings = list(parse(testfile))
+        assert success
         assert 62 == len(findings)
         finding = findings[0]
         assert "High" == finding["severity"]
@@ -67,7 +76,8 @@ class TestSnykParser:
     def test_Snyk_parser_one_project(self):
         """Report that have only one project"""
         testfile = open("tests/scans/snyk/single_project_many_vulns.json")
-        findings = list(parse(testfile))
+        success, message, findings = list(parse(testfile))
+        assert success
         assert 41 == len(findings)
         finding = findings[0]
         assert "Medium" == finding["severity"]
@@ -77,3 +87,9 @@ class TestSnykParser:
         assert 494 in finding["cwes"]
         assert 829 in finding["cwes"]
         assert "SNYK-JAVA-COMBEUST-174815" == finding["vuln_id_from_tool"]
+
+    def test_Snyk_parser_ko(self):
+        """Report that is generated when Snyk failed"""
+        testfile = open("tests/scans/snyk/report_ko1.json")
+        success, message, findings = list(parse(testfile))
+        assert not success  # error with Snyk
