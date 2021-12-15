@@ -1,7 +1,7 @@
 
 
 [dependencies]
-python-dateutil = "^7.0"
+python-dateutil = "2.8.2"
 
 [build-system]
 requires = ["flit_core >=2,<4"]
