@@ -153,3 +153,33 @@ class TestSarif:
         assert 29 == finding["line"]
         assert "FF1048" == finding["vuln_id_from_tool"]
         assert 327 in finding["cwe"]
+
+    def test_sarif_njsscan(self):
+        testfile = open("tests/scans/sarif/njsscan.sarif")
+        success, message, findings = parse(testfile)
+        findings = list(findings)
+        assert success
+        assert 2 == len(findings)
+        for finding in findings:
+            check_finding(finding)
+        finding = findings[0]
+        assert "Medium" == finding["severity"]
+        assert "file:///src/index.js" == finding["file_path"]
+        assert 321 == finding["line"]
+        assert "node_insecure_random_generator" == finding["vuln_id_from_tool"]
+        assert [] == finding["cwe"]
+
+    def test_sarif_spotbugs(self):
+        testfile = open("tests/scans/sarif/spotbugs.sarif")
+        success, message, findings = parse(testfile)
+        findings = list(findings)
+        assert success
+        assert 56 == len(findings)
+        for finding in findings:
+            check_finding(finding)
+        finding = findings[0]
+        assert "Info" == finding["severity"]
+        assert "Boot.java" == finding["file_path"]
+        assert 23 == finding["line"]
+        assert "DMI_HARDCODED_ABSOLUTE_FILENAME" == finding["vuln_id_from_tool"]
+        assert [] == finding["cwe"]
