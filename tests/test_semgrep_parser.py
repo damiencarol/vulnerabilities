@@ -95,3 +95,24 @@ class TestSemgrepParser:
         assert 33 == finding["line"]
         assert 1236 == finding["cwe"]
         assert "python.lang.security.unquoted-csv-writer.unquoted-csv-writer" == finding["vuln_id_from_tool"]
+
+    def test_Semgrep_parser_report_remediation1(self):
+        testfile = open("tests/scans/semgrep/report_remediation1.json")
+        success, message, findings = parse(testfile)
+        findings = list(findings)
+        assert success
+        testfile.close()
+        assert 4 == len(findings)
+        for finding in findings:
+            check_finding(finding)
+        finding = findings[0]
+        assert "Low" == finding["severity"]
+        assert "tests/payload/payload.py" == finding["file_path"]
+        assert 5 == finding["line"]
+        # check one finding which have remediation data
+        finding = findings[3]
+        assert "High" == finding["severity"]
+        assert "tests/payload/payload.py" == finding["file_path"]
+        assert 1 == finding["line"]
+        assert "mitigation" in finding
+        assert finding["mitigation"] is not None
