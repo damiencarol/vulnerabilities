@@ -131,3 +131,18 @@ class TestSarif:
     #     assert 1 == finding["line"]
     #     assert "mitigation" in finding
     #     assert finding["mitigation"] is not None
+
+    def test_sarif_flawfinder(self):
+        testfile = open("tests/scans/sarif/flawfinder.sarif")
+        success, message, findings = parse(testfile)
+        findings = list(findings)
+        assert success
+        assert 54 == len(findings)
+        for finding in findings:
+            check_finding(finding)
+        finding = findings[0]
+        assert "Critical" == finding["severity"]
+        assert "src/tree/param.cc" == finding["file_path"]
+        assert 29 == finding["line"]
+        assert "FF1048" == finding["vuln_id_from_tool"]
+        assert 327 in finding["cwe"]

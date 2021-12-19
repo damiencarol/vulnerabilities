@@ -56,13 +56,22 @@ def get_rule_tags(rule):
     return rule["properties"]["tags"]
 
 
+def search_cwe(value, cwes):
+    matches = re.search(CWE_REGEX, value, re.IGNORECASE)
+    if matches:
+        cwes.append(int(matches[0].split("-")[1]))
+
+
 def get_rule_cwes(rule):
-    """extract CWE from tags of a rule by regex (could be more than one"""
     cwes = []
+    if 'relationships' in rule and type(rule['relationships']) == list:
+        for relationship in rule['relationships']:
+            value = relationship['target']['id']
+            search_cwe(value, cwes)
+        return cwes
+
     for tag in get_rule_tags(rule):
-        matches = re.search(CWE_REGEX, tag, re.IGNORECASE)
-        if matches:
-            cwes.append(int(matches[0].split("-")[1]))
+        search_cwe(tag, cwes)
     return cwes
 
 
@@ -126,12 +135,18 @@ def get_item(result, rules):
     if rule is not None:
         # get the severity from the rule
         if "defaultConfiguration" in rule:
-            severity = get_severity(rule["defaultConfiguration"].get("level", "warning"))
+            severity = get_severity(
+                rule["defaultConfiguration"].get("level", "warning")
+            )
 
         if "shortDescription" in rule:
-            description = get_message_from_multiformat_message(rule["shortDescription"], rule)
+            description = get_message_from_multiformat_message(
+                rule["shortDescription"], rule
+            )
         elif "fullDescription" in rule:
-            description = get_message_from_multiformat_message(rule["fullDescription"], rule)
+            description = get_message_from_multiformat_message(
+                rule["fullDescription"], rule
+            )
         elif "name" in rule:
             description = rule["name"]
         else:
