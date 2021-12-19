@@ -1,0 +1,60 @@
+{
+    "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0.json",
+    "version": "2.1.0",
+    "runs": [
+        {
+            "tool": {
+                "driver": {
+                    "name": "CodeScanner",
+                    "version": "2",
+                    "rules": [
+                        {
+                            "id": "CA1001",
+                            "deprecatedIds": [
+                                "CA1000"
+                            ]
+                        },
+                        {
+                            "id": "CA1002",
+                            "deprecatedIds": [
+                                "CA1000"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "results": [
+                {
+                    "ruleId": "CA1001",
+                    "rule": {
+                        "index": 0
+                    },
+                    "message": {
+                        "text": "Something gone wrong"
+                    },
+                    "baselineState": "unchanged",
+                    "suppressions": [
+                        {
+                            "kind": "inSource"
+                        }
+                    ]
+                },
+                {
+                    "ruleId": "CA1002",
+                    "rule": {
+                        "index": 1
+                    },
+                    "message": {
+                        "text": "Something gone wrong but differently"
+                    },
+                    "baselineState": "updated",
+                    "suppressions": [
+                        {
+                            "kind": "inSource"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
