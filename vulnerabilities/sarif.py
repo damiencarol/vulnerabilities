@@ -55,21 +55,24 @@ def get_rule_tags(rule):
 
 
 def search_cwe(value, cwes):
+    """Search CWE in a string"""
     matches = re.search(CWE_REGEX, value, re.IGNORECASE)
     if matches:
         cwes.append(int(matches[0].split("-")[1]))
 
 
 def get_rule_cwes(rule):
+    """Try to get all CWE from a rule"""
     cwes = []
-    if 'relationships' in rule and type(rule['relationships']) == list:
-        for relationship in rule['relationships']:
-            value = relationship['target']['id']
-            search_cwe(value, cwes)
-        return cwes
+    if rule:
+        if 'relationships' in rule and isinstance(rule['relationships'], list):
+            for relationship in rule['relationships']:
+                value = relationship['target']['id']
+                search_cwe(value, cwes)
+            return cwes
 
-    for tag in get_rule_tags(rule):
-        search_cwe(tag, cwes)
+        for tag in get_rule_tags(rule):
+            search_cwe(tag, cwes)
     return cwes
 
 
