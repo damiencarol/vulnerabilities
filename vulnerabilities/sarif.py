@@ -26,9 +26,6 @@ def parse(filehandle):
         rules = {}
         for item in run["tool"]["driver"].get("rules", []):
             rules[item["id"]] = item
-        # TODO add more case to support artifacts
-        # artifacts = get_artifacts(run)
-        # get the timestamp of the run if possible
         run_date = _get_last_invocation_date(run)
         for result in run.get("results", []):
             item = get_item(result, rules)
@@ -69,15 +66,6 @@ def get_rule_cwes(rule):
     return cwes
 
 
-# def get_artifacts(run):
-#     artifacts = {}
-#     custom_index = 0  # hack because some tool doesn't generate this attribute
-#     for tree_artifact in run.get("artifacts", []):
-#         artifacts[tree_artifact.get("index", custom_index)] = tree_artifact
-#         custom_index += 1
-#     return artifacts
-
-
 def get_severity(data):
     """Convert level value to severity"""
     if data == "warning":
@@ -88,11 +76,7 @@ def get_severity(data):
 
 
 def get_message_from_multiformat_message(data, rule):
-    """Get a message from multimessage struct
-
-    See here for the specification:
-    https://docs.oasis-open.org/sarif/sarif/v2.1.0/os/sarif-v2.1.0-os.html#_Toc34317468
-    """
+    """Get a message from multimessage struct"""
     if rule is not None and "id" in data:
         text = rule["messageStrings"][data["id"]].get("text")
         arguments = data.get("arguments", [])
@@ -103,7 +87,6 @@ def get_message_from_multiformat_message(data, rule):
                 text = text.replace(substitution_str, arguments[i])
             else:
                 return text
-    # TODO manage markdown
     return data.get("text")
 
 
@@ -160,7 +143,7 @@ def get_item(result, rules):
         "description": description,
         "mitigation": mitigation,
         "references": references,
-        "cve": cve_try(result["ruleId"]),  # for now we only support when the id of the rule is a CVE
+        "cve": cve_try(result["ruleId"]),
         "cwe": get_rule_cwes(rule),
         "static_finding": True,  # by definition
         "dynamic_finding": False,  # by definition
