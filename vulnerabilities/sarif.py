@@ -51,9 +51,7 @@ def get_rule_tags(rule):
     """Get the tags from a rule"""
     if "properties" not in rule:
         return []
-    if "tags" not in rule["properties"]:
-        return []
-    return rule["properties"]["tags"]
+    return rule["properties"].get("tags", [])
 
 
 def search_cwe(value, cwes):
@@ -139,13 +137,13 @@ def get_item(result, rules):
                 rule["defaultConfiguration"].get("level", "warning")
             )
 
-        if "shortDescription" in rule:
-            description = get_message_from_multiformat_message(
-                rule["shortDescription"], rule
-            )
-        elif "fullDescription" in rule:
+        if "fullDescription" in rule:
             description = get_message_from_multiformat_message(
                 rule["fullDescription"], rule
+            )
+        elif "shortDescription" in rule:
+            description = get_message_from_multiformat_message(
+                rule["shortDescription"], rule
             )
         elif "name" in rule:
             description = rule["name"]
