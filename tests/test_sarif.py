@@ -24,6 +24,13 @@ class TestSarif:
         assert "C2001" == finding["vuln_id_from_tool"]
         assert [] == finding["cwe"]
 
+    def test_sarif_appendix_empty_invoc(self):
+        testfile = open("tests/scans/sarif/appendix_empty_invoc.sarif")
+        success, message, findings = parse(testfile)
+        findings = list(findings)
+        assert success
+        assert 0 == len(findings)
+
     # def test_sarif_appendix_k1(self):
     #     testfile = open("tests/scans/sarif/appendix_k1.sarif")
     #     success, message, findings = parse(testfile)
