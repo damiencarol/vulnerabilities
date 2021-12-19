@@ -3,14 +3,14 @@ import datetime
 import pytest
 from dateutil.tz import tzutc
 
-from vulnerabilities.tools.semgrep.parser import parse
+from vulnerabilities.sarif import parse
 from utils import check_finding
 
 
-class TestSemgrepParser:
+class TestSarif:
 
-    def test_Semgrep_parser_has_no_finding(self):
-        testfile = open("tests/scans/semgrep/empty.json")
+    def test_sarif_has_no_finding(self):
+        testfile = open("tests/scans/sarif/empty.json")
         success, message, findings = parse(testfile)
         findings = list(findings)
         assert success

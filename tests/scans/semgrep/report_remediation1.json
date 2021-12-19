@@ -1,0 +1,169 @@
+{
+    "results": [
+        {
+            "check_id": "python.lang.security.insecure-hash-algorithms.insecure-hash-algorithm-md5",
+            "path": "tests/payload/payload.py",
+            "start": {
+                "line": 5,
+                "col": 19
+            },
+            "end": {
+                "line": 5,
+                "col": 37
+            },
+            "extra": {
+                "message": "Detected MD5 hash algorithm which is considered insecure. MD5 is not\ncollision resistant and is therefore not suitable as a cryptographic\nsignature. Use SHA256 or SHA3 instead.\n",
+                "metavars": {},
+                "metadata": {
+                    "source-rule-url": "https://github.com/PyCQA/bandit/blob/d5f8fa0d89d7b11442fc6ec80ca42953974354c8/bandit/blacklists/calls.py#L59",
+                    "cwe": "CWE-327: Use of a Broken or Risky Cryptographic Algorithm",
+                    "owasp": "A3: Sensitive Data Exposure",
+                    "bandit-code": "B303",
+                    "asvs": {
+                        "section": "V6 Stored Cryptography Verification Requirements",
+                        "control_id": "6.2.2 Insecure Custom Algorithm",
+                        "control_url": "https://github.com/OWASP/ASVS/blob/master/4.0/en/0x14-V6-Cryptography.md#v62-algorithms",
+                        "version": "4"
+                    },
+                    "references": [
+                        "https://tools.ietf.org/html/rfc6151",
+                        "https://crypto.stackexchange.com/questions/44151/how-does-the-flame-malware-take-advantage-of-md5-collision",
+                        "https://pycryptodome.readthedocs.io/en/latest/src/hash/sha3_256.html"
+                    ]
+                },
+                "severity": "WARNING",
+                "is_ignored": false,
+                "lines": "    test_digest = md5(\"test string\").digest()"
+            }
+        },
+        {
+            "check_id": "python.lang.security.insecure-hash-algorithms.insecure-hash-algorithm-md5",
+            "path": "tests/payload/payload.py",
+            "start": {
+                "line": 9,
+                "col": 34
+            },
+            "end": {
+                "line": 9,
+                "col": 52
+            },
+            "extra": {
+                "message": "Detected MD5 hash algorithm which is considered insecure. MD5 is not\ncollision resistant and is therefore not suitable as a cryptographic\nsignature. Use SHA256 or SHA3 instead.\n",
+                "metavars": {},
+                "metadata": {
+                    "source-rule-url": "https://github.com/PyCQA/bandit/blob/d5f8fa0d89d7b11442fc6ec80ca42953974354c8/bandit/blacklists/calls.py#L59",
+                    "cwe": "CWE-327: Use of a Broken or Risky Cryptographic Algorithm",
+                    "owasp": "A3: Sensitive Data Exposure",
+                    "bandit-code": "B303",
+                    "asvs": {
+                        "section": "V6 Stored Cryptography Verification Requirements",
+                        "control_id": "6.2.2 Insecure Custom Algorithm",
+                        "control_url": "https://github.com/OWASP/ASVS/blob/master/4.0/en/0x14-V6-Cryptography.md#v62-algorithms",
+                        "version": "4"
+                    },
+                    "references": [
+                        "https://tools.ietf.org/html/rfc6151",
+                        "https://crypto.stackexchange.com/questions/44151/how-does-the-flame-malware-take-advantage-of-md5-collision",
+                        "https://pycryptodome.readthedocs.io/en/latest/src/hash/sha3_256.html"
+                    ]
+                },
+                "severity": "WARNING",
+                "is_ignored": false,
+                "lines": "    test_digesta, test_digestb = md5(\"test string\").digest(), md5(\"test string2\").digest()"
+            }
+        },
+        {
+            "check_id": "python.lang.security.insecure-hash-algorithms.insecure-hash-algorithm-md5",
+            "path": "tests/payload/payload.py",
+            "start": {
+                "line": 9,
+                "col": 63
+            },
+            "end": {
+                "line": 9,
+                "col": 82
+            },
+            "extra": {
+                "message": "Detected MD5 hash algorithm which is considered insecure. MD5 is not\ncollision resistant and is therefore not suitable as a cryptographic\nsignature. Use SHA256 or SHA3 instead.\n",
+                "metavars": {},
+                "metadata": {
+                    "source-rule-url": "https://github.com/PyCQA/bandit/blob/d5f8fa0d89d7b11442fc6ec80ca42953974354c8/bandit/blacklists/calls.py#L59",
+                    "cwe": "CWE-327: Use of a Broken or Risky Cryptographic Algorithm",
+                    "owasp": "A3: Sensitive Data Exposure",
+                    "bandit-code": "B303",
+                    "asvs": {
+                        "section": "V6 Stored Cryptography Verification Requirements",
+                        "control_id": "6.2.2 Insecure Custom Algorithm",
+                        "control_url": "https://github.com/OWASP/ASVS/blob/master/4.0/en/0x14-V6-Cryptography.md#v62-algorithms",
+                        "version": "4"
+                    },
+                    "references": [
+                        "https://tools.ietf.org/html/rfc6151",
+                        "https://crypto.stackexchange.com/questions/44151/how-does-the-flame-malware-take-advantage-of-md5-collision",
+                        "https://pycryptodome.readthedocs.io/en/latest/src/hash/sha3_256.html"
+                    ]
+                },
+                "severity": "WARNING",
+                "is_ignored": false,
+                "lines": "    test_digesta, test_digestb = md5(\"test string\").digest(), md5(\"test string2\").digest()"
+            }
+        },
+        {
+            "check_id": "python.lang.security.use-defused-xml.use-defused-xml",
+            "path": "tests/payload/payload.py",
+            "start": {
+                "line": 1,
+                "col": 1
+            },
+            "end": {
+                "line": 1,
+                "col": 15
+            },
+            "extra": {
+                "message": "Found use of the native Python XML libraries, which is vulnerable to XML external entity (XXE)\nattacks. The Python documentation recommends the 'defusedxml' library instead. Use 'defusedxml'.\nSee https://github.com/tiran/defusedxml for more information.\n",
+                "metavars": {},
+                "metadata": {
+                    "owasp": "A4: XML External Entities (XXE)",
+                    "cwe": "CWE-611: Improper Restriction of XML External Entity Reference",
+                    "references": [
+                        "https://docs.python.org/3/library/xml.html",
+                        "https://github.com/tiran/defusedxml"
+                    ]
+                },
+                "severity": "ERROR",
+                "fix_regex": {
+                    "regex": "xml",
+                    "replacement": "defusedxml"
+                },
+                "is_ignored": false,
+                "lines": "import xml.sax"
+            }
+        }
+    ],
+    "errors": [
+        {
+            "type": "SourceParseError",
+            "code": 3,
+            "level": "warn",
+            "short_msg": "parse error",
+            "long_msg": "Could not parse report_remediation1.json as json",
+            "spans": [
+                {
+                    "start": {
+                        "line": 2,
+                        "col": 1
+                    },
+                    "end": {
+                        "line": 2,
+                        "col": 9
+                    },
+                    "source_hash": "39ccc27623d2ec64657a4f93abc3e41de2098e309227f98560e8671a004626d1",
+                    "file": "tests/scans/semgrep/report_remediation1.json",
+                    "context_start": null,
+                    "context_end": null
+                }
+            ],
+            "help": "If the code appears to be valid, this may be a semgrep bug."
+        }
+    ]
+}
