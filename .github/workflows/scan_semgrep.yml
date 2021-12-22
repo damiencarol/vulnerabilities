@@ -38,6 +38,5 @@ jobs:
 
             - name: Run integration tests
               run: |
-                  python -m flit build
-                  python -m pip install dist/vulnerabilities-*.whl
+                  python -m flit install
                   python integration_tests/test_semgrep.py
