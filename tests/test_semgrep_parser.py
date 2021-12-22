@@ -16,15 +16,6 @@ class TestSemgrepParser:
         assert success
         assert 0 == len(findings)
 
-    def test_Semgrep_parser_latest(self):
-        testfile = open("tests/scans/semgrep/latest.json")
-        success, message, findings = parse(testfile)
-        findings = list(findings)
-        assert success
-        assert findings is not None
-        for finding in findings:
-            check_finding(finding)
-
     def test_Semgrep_parser_report1(self):
         testfile = open("tests/scans/semgrep/report1.json")
         success, message, findings = parse(testfile)
