@@ -12,9 +12,6 @@ success, message, findings = parse(testfile)
 findings = list(findings)
 assert success, message
 assert findings is not None
-assert 4 == len(findings) , f"Wrong number of findings: {len(findings)}"
-import json
-print(json.dumps(findings, indent=2))
 
 # SARIF output
 testfile = open("tests/scans/sarif/semgrep_latest.sarif")
@@ -22,9 +19,6 @@ success, message, findings = parse_sarif(testfile)
 findings = list(findings)
 assert success, message
 assert findings is not None
-assert 4 == len(findings) , f"Wrong number of findings: {len(findings)}"
-import json
-print(json.dumps(findings, indent=2))
 
 # test pandas loading
 import pandas as pd

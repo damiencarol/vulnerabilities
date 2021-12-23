@@ -36,6 +36,18 @@ jobs:
                   python -m semgrep --json --config=p/security-audit -o tests/scans/semgrep/latest.json "tests/payload/"
                   python -m semgrep --sarif --config=p/security-audit -o tests/scans/sarif/semgrep_latest.sarif "tests/payload/"
 
+            - name: Upload Reports JSON
+              uses: actions/upload-artifact@v2
+              with:
+                  name: semgrep-json
+                  path: "tests/scans/semgrep/latest.json"
+
+            - name: Upload Reports SARIF
+              uses: actions/upload-artifact@v2
+              with:
+                  name: semgrep-sarif
+                  path: "tests/scans/sarif/semgrep_latest.sarif "
+
             - name: Run integration tests
               run: |
                   python -m flit install
