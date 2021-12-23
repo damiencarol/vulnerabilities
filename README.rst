@@ -21,8 +21,7 @@ from various different tools.
 
 Installation
 ============
-`vulnerabilities` can be installed from PyPI using `pip` (note that the package name is
-different from the importable name)::
+Module `vulnerabilities` can be installed from PyPI using `pip` ::
 
     pip install vulnerabilities
 
@@ -42,7 +41,11 @@ https://github.com/damiencarol/vulnerabilities/
 Features
 ========
 
-* Load reports from different tools (Anchore Grype, Bandit, CycloneDX format)
+* Load reports from different tools
+  - Anchore Grype
+  - Bandit (https://github.com/PyCQA/bandit)
+  - CycloneDX (https://cyclonedx.org/)
+  - SARIF (https://www.oasis-open.org/committees/sarif/)
 
 Quick example
 =============
