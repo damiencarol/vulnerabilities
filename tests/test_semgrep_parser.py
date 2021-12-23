@@ -8,13 +8,21 @@ from utils import check_finding
 
 
 class TestSemgrepParser:
-
     def test_Semgrep_parser_has_no_finding(self):
         testfile = open("tests/scans/semgrep/empty.json")
         success, message, findings = parse(testfile)
         findings = list(findings)
         assert success
         assert 0 == len(findings)
+
+    # This case is interesting
+    # the report is failing but the data are good
+    # so should we say that it's an error?
+    def test_Semgrep_error_report(self):
+        testfile = open("tests/scans/semgrep/error.json")
+        success, message, findings = parse(testfile)
+        assert not success
+        assert "file not found" in message.lower()
 
     def test_Semgrep_parser_report1(self):
         testfile = open("tests/scans/semgrep/report1.json")
