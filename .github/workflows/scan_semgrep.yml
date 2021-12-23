@@ -33,8 +33,9 @@ jobs:
               run: |
                   mkdir -p tests/scans/sarif/
                   mkdir -p tests/scans/semgrep/
-                  python -m semgrep --json --config=p/security-audit -o tests/scans/semgrep/latest.json "tests/payload/"
-                  python -m semgrep --sarif --config=p/security-audit -o tests/scans/sarif/semgrep_latest.sarif "tests/payload/"
+                  ls tests/payload/
+                  python -m semgrep --json --config=p/security-audit -o tests/scans/semgrep/latest.json tests/payload/
+                  python -m semgrep --sarif --config=p/security-audit -o tests/scans/sarif/semgrep_latest.sarif tests/payload/
 
             - name: Upload Reports JSON
               uses: actions/upload-artifact@v2
@@ -46,7 +47,7 @@ jobs:
               uses: actions/upload-artifact@v2
               with:
                   name: semgrep-sarif
-                  path: "tests/scans/sarif/semgrep_latest.sarif "
+                  path: "tests/scans/sarif/semgrep_latest.sarif"
 
             - name: Run integration tests
               run: |
