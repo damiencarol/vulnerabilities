@@ -33,7 +33,6 @@ jobs:
               run: |
                   mkdir -p tests/scans/sarif/
                   mkdir -p tests/scans/semgrep/
-                  ls tests/payload/
                   python -m semgrep --json --config=p/security-audit -o tests/scans/semgrep/latest.json tests/payload/
                   python -m semgrep --sarif --config=p/security-audit -o tests/scans/sarif/semgrep_latest.sarif tests/payload/
 
