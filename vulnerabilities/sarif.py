@@ -65,9 +65,9 @@ def get_rule_cwes(rule):
     """Try to get all CWE from a rule"""
     cwes = []
     if rule:
-        if 'relationships' in rule and isinstance(rule['relationships'], list):
-            for relationship in rule['relationships']:
-                value = relationship['target']['id']
+        if "relationships" in rule and isinstance(rule["relationships"], list):
+            for relationship in rule["relationships"]:
+                value = relationship["target"]["id"]
                 search_cwe(value, cwes)
             return cwes
 

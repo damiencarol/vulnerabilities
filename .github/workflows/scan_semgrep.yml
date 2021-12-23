@@ -1,0 +1,54 @@
+
+name: Check Semgrep scanner
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout sources
+              uses: actions/checkout@v2
+
+            - name: Set up Python
+              uses: actions/setup-python@v2
+              with:
+                  python-version: 3.9
+
+            - name: Install dependencies
+              run: |
+                  python -m pip install --upgrade pip
+                  python -m pip install flit pytest pandas
+
+            - name: Install Semgrep
+              run: |
+                  python -m pip install semgrep
+
+            - name: Run Semgrep
+              run: |
+                  mkdir -p tests/scans/sarif/
+                  mkdir -p tests/scans/semgrep/
+                  python -m semgrep --json --config=p/security-audit -o tests/scans/semgrep/latest.json tests/payload
+                  python -m semgrep --sarif --config=p/security-audit -o tests/scans/sarif/semgrep_latest.sarif tests/payload
+
+            - name: Upload Reports JSON
+              uses: actions/upload-artifact@v2
+              with:
+                  name: semgrep-json
+                  path: "tests/scans/semgrep/latest.json"
+
+            - name: Upload Reports SARIF
+              uses: actions/upload-artifact@v2
+              with:
+                  name: semgrep-sarif
+                  path: "tests/scans/sarif/semgrep_latest.sarif"
+
+            - name: Run integration tests
+              run: |
+                  python -m flit install
+                  python integration_tests/test_semgrep.py

@@ -3,6 +3,13 @@ import json
 
 def parse(file):
     data = json.load(file)
+    # if the report have errors and no data
+    if len(data["errors"]) > 0 and len(data["results"]) == 0:
+        return (
+            False,
+            "\n".join([it.get("message", it.get("long_msg")) for it in data["errors"]]),
+            None,
+        )
     try:
         res = list(parse_internal(data))
     except ValueError as exc:
