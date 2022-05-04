@@ -1,0 +1,363 @@
+{
+    "vulnerabilities": [
+        {
+            "CVSSv3": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+            "creationTime": "2022-04-14T10:24:30.523995Z",
+            "credit": [
+                ""
+            ],
+            "cvssScore": 7.5,
+            "description": "## NVD Description\n**_Note:_** _Versions mentioned in the description apply to the upstream `p11-kit-tools` package._\n_See `How to fix?` for `SLES:15.3` relevant versions._\n\nAn issue was discovered in p11-kit 0.21.1 through 0.23.21. Multiple integer overflows have been discovered in the array allocations in the p11-kit library and the p11-kit list command, where overflow checks are missing before calling realloc or calloc.\n## Remediation\nUpgrade `SLES:15.3` `p11-kit-tools` to version 0.23.2-4.13.1 or higher.\n## References\n- [CVE-2020-29361](https://www.suse.com/security/cve/CVE-2020-29361.html)\n- [E-Mail link for SUSE-SU-2021:4154-1](https://lists.suse.com/pipermail/sle-security-updates/2021-December/009932.html)\n- [Link for SUSE-SU-2021:4154-1](https://www.suse.com/support/update/announcement/2021/suse-su-20214154-1/)\n- [SUSE Bug 1180064](https://bugzilla.suse.com/1180064)\n- [SUSE Bug 1187993](https://bugzilla.suse.com/1187993)\n- [SUSE CVE CVE-2020-29361 page](https://www.suse.com/security/cve/CVE-2020-29361/)\n- [SUSE Security Ratings](https://www.suse.com/support/security/rating/)\n- [MISC](https://github.com/p11-glue/p11-kit/security/advisories/GHSA-q4r3-hm6m-mvc2)\n- [MISC](https://github.com/p11-glue/p11-kit/releases)\n- [DEBIAN](https://www.debian.org/security/2021/dsa-4822)\n- [MLIST](https://lists.debian.org/debian-lts-announce/2021/01/msg00002.html)\n- [MLIST](https://lists.apache.org/thread.html/rf4c02775860db415b4955778a131c2795223f61cb8c6a450893651e4@%3Cissues.bookkeeper.apache.org%3E)\n- [MLIST](https://lists.apache.org/thread.html/r58af02e294bd07f487e2c64ffc0a29b837db5600e33b6e698b9d696b@%3Cissues.bookkeeper.apache.org%3E)\n",
+            "disclosureTime": "2021-12-22T10:02:45Z",
+            "exploit": "Not Defined",
+            "id": "SNYK-SLES153-P11KITTOOLS-2650307",
+            "identifiers": {
+                "SUSE": [
+                    "SUSE-SU-2021:4154-1"
+                ],
+                "ALTERNATIVE": [],
+                "CVE": [
+                    "CVE-2020-29361"
+                ],
+                "CWE": []
+            },
+            "malicious": false,
+            "modificationTime": "2022-04-14T10:26:48.231735Z",
+            "nvdSeverity": "high",
+            "packageName": "p11-kit-tools",
+            "patches": [],
+            "publicationTime": "2022-04-14T10:24:08.931777Z",
+            "references": [
+                {
+                    "title": "CVE-2020-29361",
+                    "url": "https://www.suse.com/security/cve/CVE-2020-29361.html"
+                },
+                {
+                    "title": "E-Mail link for SUSE-SU-2021:4154-1",
+                    "url": "https://lists.suse.com/pipermail/sle-security-updates/2021-December/009932.html"
+                },
+                {
+                    "title": "Link for SUSE-SU-2021:4154-1",
+                    "url": "https://www.suse.com/support/update/announcement/2021/suse-su-20214154-1/"
+                },
+                {
+                    "title": "SUSE Bug 1180064",
+                    "url": "https://bugzilla.suse.com/1180064"
+                },
+                {
+                    "title": "SUSE Bug 1187993",
+                    "url": "https://bugzilla.suse.com/1187993"
+                },
+                {
+                    "title": "SUSE CVE CVE-2020-29361 page",
+                    "url": "https://www.suse.com/security/cve/CVE-2020-29361/"
+                },
+                {
+                    "title": "SUSE Security Ratings",
+                    "url": "https://www.suse.com/support/security/rating/"
+                },
+                {
+                    "title": "MISC",
+                    "url": "https://github.com/p11-glue/p11-kit/security/advisories/GHSA-q4r3-hm6m-mvc2"
+                },
+                {
+                    "title": "MISC",
+                    "url": "https://github.com/p11-glue/p11-kit/releases"
+                },
+                {
+                    "title": "DEBIAN",
+                    "url": "https://www.debian.org/security/2021/dsa-4822"
+                },
+                {
+                    "title": "MLIST",
+                    "url": "https://lists.debian.org/debian-lts-announce/2021/01/msg00002.html"
+                },
+                {
+                    "title": "MLIST",
+                    "url": "https://lists.apache.org/thread.html/rf4c02775860db415b4955778a131c2795223f61cb8c6a450893651e4@%3Cissues.bookkeeper.apache.org%3E"
+                },
+                {
+                    "title": "MLIST",
+                    "url": "https://lists.apache.org/thread.html/r58af02e294bd07f487e2c64ffc0a29b837db5600e33b6e698b9d696b@%3Cissues.bookkeeper.apache.org%3E"
+                }
+            ],
+            "relativeImportance": "important",
+            "semver": {
+                "vulnerable": [
+                    "<0.23.2-4.13.1"
+                ]
+            },
+            "severity": "high",
+            "socialTrendAlert": false,
+            "title": "Integer Overflow or Wraparound",
+            "packageManager": "sles:15.3",
+            "language": "linux",
+            "severityWithCritical": "high",
+            "from": [
+                "docker-image|proj-adp-log-released_eric-data-search-engine-tls-proxy@8.2.0-28.tar",
+                "p11-kit-tools@0.23.2-4.8.3"
+            ],
+            "upgradePath": [
+                false,
+                "p11-kit-tools@0.23.2-4.13.1"
+            ],
+            "isUpgradable": true,
+            "isPatchable": false,
+            "name": "p11-kit-tools",
+            "version": "0.23.2-4.8.3",
+            "nearestFixedInVersion": "0.23.2-4.13.1"
+        },
+        {
+            "CVSSv3": null,
+            "creationTime": "2022-04-14T10:18:59.325331Z",
+            "credit": [
+                ""
+            ],
+            "cvssScore": null,
+            "description": "## NVD Description\n_This vulnerability has not been analyzed by NVD yet._\n\n## Remediation\nUpgrade `SLES:15.3` `permissions` to version 20181225-23.12.1 or higher.\n## References\n- [E-Mail link for SUSE-SU-2022:0141-1](https://lists.suse.com/pipermail/sle-security-updates/2022-January/010038.html)\n- [Link for SUSE-SU-2022:0141-1](https://www.suse.com/support/update/announcement/2022/suse-su-20220141-1/)\n- [SUSE Bug 1169614](https://bugzilla.suse.com/1169614)\n- [SUSE Security Ratings](https://www.suse.com/support/security/rating/)\n",
+            "disclosureTime": "2022-01-20T12:47:24Z",
+            "exploit": "Not Defined",
+            "id": "SNYK-SLES153-PERMISSIONS-2648113",
+            "identifiers": {
+                "SUSE": [
+                    "SUSE-SU-2022:0141-1"
+                ],
+                "ALTERNATIVE": [],
+                "CVE": [],
+                "CWE": []
+            },
+            "malicious": false,
+            "modificationTime": "2022-04-14T10:18:59.327856Z",
+            "nvdSeverity": "low",
+            "packageName": "permissions",
+            "patches": [],
+            "publicationTime": "2022-04-14T10:18:37.951002Z",
+            "references": [
+                {
+                    "title": "E-Mail link for SUSE-SU-2022:0141-1",
+                    "url": "https://lists.suse.com/pipermail/sle-security-updates/2022-January/010038.html"
+                },
+                {
+                    "title": "Link for SUSE-SU-2022:0141-1",
+                    "url": "https://www.suse.com/support/update/announcement/2022/suse-su-20220141-1/"
+                },
+                {
+                    "title": "SUSE Bug 1169614",
+                    "url": "https://bugzilla.suse.com/1169614"
+                },
+                {
+                    "title": "SUSE Security Ratings",
+                    "url": "https://www.suse.com/support/security/rating/"
+                }
+            ],
+            "relativeImportance": null,
+            "semver": {
+                "vulnerable": [
+                    "<20181225-23.12.1"
+                ]
+            },
+            "severity": "low",
+            "socialTrendAlert": false,
+            "title": "SUSE-SU-2022:0141-1",
+            "packageManager": "sles:15.3",
+            "language": "linux",
+            "severityWithCritical": "low",
+            "from": [
+                "docker-image|proj-adp-log-released_eric-data-search-engine-tls-proxy@8.2.0-28.tar",
+                "permissions@20181225-23.6.1"
+            ],
+            "upgradePath": [
+                false,
+                "permissions@20181225-23.12.1"
+            ],
+            "isUpgradable": true,
+            "isPatchable": false,
+            "name": "permissions",
+            "version": "20181225-23.6.1",
+            "nearestFixedInVersion": "20181225-23.12.1"
+        },
+        {
+            "CVSSv3": null,
+            "creationTime": "2022-04-14T10:23:53.594763Z",
+            "credit": [
+                ""
+            ],
+            "cvssScore": null,
+            "description": "## NVD Description\n_This vulnerability has not been analyzed by NVD yet._\n\n## Remediation\nUpgrade `SLES:15.3` `permissions` to version 20181225-23.9.1 or higher.\n## References\n- [E-Mail link for SUSE-SU-2021:4192-1](https://lists.suse.com/pipermail/sle-security-updates/2021-December/009953.html)\n- [Link for SUSE-SU-2021:4192-1](https://www.suse.com/support/update/announcement/2021/suse-su-20214192-1/)\n- [SUSE Bug 1174504](https://bugzilla.suse.com/1174504)\n- [SUSE Security Ratings](https://www.suse.com/support/security/rating/)\n",
+            "disclosureTime": "2021-12-28T09:40:04Z",
+            "exploit": "Not Defined",
+            "id": "SNYK-SLES153-PERMISSIONS-2650076",
+            "identifiers": {
+                "SUSE": [
+                    "SUSE-SU-2021:4192-1"
+                ],
+                "ALTERNATIVE": [],
+                "CVE": [],
+                "CWE": []
+            },
+            "malicious": false,
+            "modificationTime": "2022-04-14T10:23:53.598574Z",
+            "nvdSeverity": "low",
+            "packageName": "permissions",
+            "patches": [],
+            "publicationTime": "2022-04-14T10:23:51.332452Z",
+            "references": [
+                {
+                    "title": "E-Mail link for SUSE-SU-2021:4192-1",
+                    "url": "https://lists.suse.com/pipermail/sle-security-updates/2021-December/009953.html"
+                },
+                {
+                    "title": "Link for SUSE-SU-2021:4192-1",
+                    "url": "https://www.suse.com/support/update/announcement/2021/suse-su-20214192-1/"
+                },
+                {
+                    "title": "SUSE Bug 1174504",
+                    "url": "https://bugzilla.suse.com/1174504"
+                },
+                {
+                    "title": "SUSE Security Ratings",
+                    "url": "https://www.suse.com/support/security/rating/"
+                }
+            ],
+            "relativeImportance": null,
+            "semver": {
+                "vulnerable": [
+                    "<20181225-23.9.1"
+                ]
+            },
+            "severity": "low",
+            "socialTrendAlert": false,
+            "title": "SUSE-SU-2021:4192-1",
+            "packageManager": "sles:15.3",
+            "language": "linux",
+            "severityWithCritical": "low",
+            "from": [
+                "docker-image|proj-adp-log-released_eric-data-search-engine-tls-proxy@8.2.0-28.tar",
+                "permissions@20181225-23.6.1"
+            ],
+            "upgradePath": [
+                false,
+                "permissions@20181225-23.9.1"
+            ],
+            "isUpgradable": true,
+            "isPatchable": false,
+            "name": "permissions",
+            "version": "20181225-23.6.1",
+            "nearestFixedInVersion": "20181225-23.9.1"
+        }
+    ],
+    "ok": false,
+    "dependencyCount": 135,
+    "org": "bt-mobile-operation-poc",
+    "policy": "# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.\nversion: v1.22.1\nignore: {}\npatch: {}\n",
+    "isPrivate": true,
+    "licensesPolicy": {
+        "severities": {},
+        "orgLicenseRules": {
+            "AGPL-1.0": {
+                "licenseType": "AGPL-1.0",
+                "severity": "high",
+                "instructions": ""
+            },
+            "AGPL-3.0": {
+                "licenseType": "AGPL-3.0",
+                "severity": "high",
+                "instructions": ""
+            },
+            "Artistic-1.0": {
+                "licenseType": "Artistic-1.0",
+                "severity": "medium",
+                "instructions": ""
+            },
+            "Artistic-2.0": {
+                "licenseType": "Artistic-2.0",
+                "severity": "medium",
+                "instructions": ""
+            },
+            "CDDL-1.0": {
+                "licenseType": "CDDL-1.0",
+                "severity": "medium",
+                "instructions": ""
+            },
+            "CPOL-1.02": {
+                "licenseType": "CPOL-1.02",
+                "severity": "high",
+                "instructions": ""
+            },
+            "EPL-1.0": {
+                "licenseType": "EPL-1.0",
+                "severity": "medium",
+                "instructions": ""
+            },
+            "GPL-2.0": {
+                "licenseType": "GPL-2.0",
+                "severity": "high",
+                "instructions": ""
+            },
+            "GPL-3.0": {
+                "licenseType": "GPL-3.0",
+                "severity": "high",
+                "instructions": ""
+            },
+            "LGPL-2.0": {
+                "licenseType": "LGPL-2.0",
+                "severity": "medium",
+                "instructions": ""
+            },
+            "LGPL-2.1": {
+                "licenseType": "LGPL-2.1",
+                "severity": "medium",
+                "instructions": ""
+            },
+            "LGPL-3.0": {
+                "licenseType": "LGPL-3.0",
+                "severity": "medium",
+                "instructions": ""
+            },
+            "MPL-1.1": {
+                "licenseType": "MPL-1.1",
+                "severity": "medium",
+                "instructions": ""
+            },
+            "MPL-2.0": {
+                "licenseType": "MPL-2.0",
+                "severity": "medium",
+                "instructions": ""
+            },
+            "MS-RL": {
+                "licenseType": "MS-RL",
+                "severity": "medium",
+                "instructions": ""
+            },
+            "SimPL-2.0": {
+                "licenseType": "SimPL-2.0",
+                "severity": "high",
+                "instructions": ""
+            }
+        }
+    },
+    "packageManager": "rpm",
+    "ignoreSettings": null,
+    "docker": {
+        "baseImageRemediation": {
+            "code": "UNTRACKED_NEW_OS",
+            "advice": [
+                {
+                    "message": "Note that we currently do not have vulnerability information for SUSE Linux Enterprise Server, which we detected in your image.",
+                    "bold": true,
+                    "color": "yellow"
+                }
+            ]
+        }
+    },
+    "summary": "75 vulnerable dependency paths",
+    "filesystemPolicy": false,
+    "filtered": {
+        "ignore": [],
+        "patch": []
+    },
+    "uniqueCount": 75,
+    "projectName": "docker-image|proj-adp-log-released_eric-data-search-engine-tls-proxy",
+    "platform": "linux/amd64",
+    "path": "docker-archive:proj-adp-log-released_eric-data-search-engine-tls-proxy:8.2.0-28.tar"
+}

@@ -97,3 +97,24 @@ class TestSnykParser:
         testfile = open("tests/scans/snyk/report_ko1.json")
         success, message, findings = list(parse(testfile))
         assert not success  # error with Snyk
+
+    def test_Snyk_parser_new_data(self):
+        """"""
+        testfile = open("tests/scans/snyk/KULwF8Hx.json")
+        success, message, findings = list(parse(testfile))
+        assert success
+        assert 3 == len(findings)
+        for finding in findings:
+            check_finding(finding)
+        finding = findings[0]
+        assert "High" == finding["severity"]
+        assert "sles:15.3" == finding["component_vendor"]
+        assert "p11-kit-tools" == finding["component_name"]
+        assert "0.23.2-4.8.3" == finding["component_version"]
+        assert "SNYK-SLES153-P11KITTOOLS-2650307" == finding["vuln_id_from_tool"]
+        finding = findings[1]
+        assert "Low" == finding["severity"]
+        assert "sles:15.3" == finding["component_vendor"]
+        assert "permissions" == finding["component_name"]
+        assert "20181225-23.6.1" == finding["component_version"]
+        assert "SNYK-SLES153-PERMISSIONS-2648113" == finding["vuln_id_from_tool"]
